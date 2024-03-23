@@ -1,5 +1,5 @@
 # Ex.No: 05  IMPLEMENTATION OF TIME SERIES ANALYSIS AND DECOMPOSITION
-### Date: 
+### Date: 23/03/2024
 
 
 ### AIM:
@@ -13,6 +13,45 @@ To Illustrates how to perform time series analysis and decomposition on the mont
 5. Display the overall results.
 
 ### PROGRAM:
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+# Load the temperature data
+# Replace 'temperature_data.csv' with the path to your data file
+data = pd.read_csv('/content/AirPassengers.csv')
+
+# Assuming your data contains two columns: 'Date' and 'Temperature'
+# Ensure that the 'Date' column is in datetime format
+data['Month'] = pd.to_datetime(data['Month'])
+
+# Set the 'Date' column as the index
+data.set_index('Month', inplace=True)
+
+# Perform time series decomposition
+period=13
+result = seasonal_decompose(data,model='multiplicative', period=period)
+
+# Plot the original time series
+plt.figure(figsize=(12, 6))
+plt.subplot(4, 1, 1)
+plt.plot(data['#Passengers'], label='original')
+plt.title('Original Time Series')
+plt.legend()
+
+# Plot the trend component
+plt.subplot(4, 1, 2)
+plt.plot(result.trend, label='Trend', color='yellow')
+plt.title('Trend Component')
+plt.legend()
+
+# Plot the seasonal component
+plt.subplot(4, 1, 3)
+plt.plot(result.seasonal, label='Seasonal', color='green')
+plt.title('Seasonal Component')
+plt.legend()
+```
 
 
 
@@ -31,19 +70,8 @@ To Illustrates how to perform time series analysis and decomposition on the mont
 
 
 ### OUTPUT:
-FIRST FIVE ROWS:
+![image](https://github.com/vikashsenthil21/TSA_EXP5/assets/119433834/b524c010-cf3b-4f92-87b8-b39449467117)
 
-
-
-PLOTTING THE DATA:
-
-SEASONAL PLOT REPRESENTATION :
-
-
-
-TREND PLOT REPRESENTATION :
-
-OVERAL REPRESENTATION:
 
 
 
